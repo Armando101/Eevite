@@ -5,7 +5,7 @@ export const Navbar = () => {
   const activeStyle = "font-semibold text-lg underline underline-offset-4";
 
   return (
-    <nav className="flex justify-between item-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light">
+    <nav className="flex justify-between item-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-white">
       <ul className="flex items-center gap-3">
         {navBarOptions
           .filter((item) => item.side === "left")
