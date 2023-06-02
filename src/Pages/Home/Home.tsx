@@ -3,6 +3,7 @@ import { Card } from "../../Components/Card/Card";
 import { Layout } from "../../Components/Layout/Layout";
 import { API } from "../../constants/endpoints.constant";
 import { Product } from "../../interfaces";
+import { ProductDetail } from "../../Components/ProductDetail/ProductDetail";
 
 export const Home = () => {
   const [items, setItems] = useState<Product[]>([]);
@@ -24,6 +25,7 @@ export const Home = () => {
           <Card key={item.id} data={item}></Card>
         ))}
       </div>
+      <ProductDetail />
     </Layout>
   );
 };
