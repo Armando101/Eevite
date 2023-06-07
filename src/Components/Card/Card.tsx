@@ -5,13 +5,16 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 
 export const Card = ({ data }: { data: Product }) => {
   const { category, images, title, price } = data;
-  const { setCounter, counter, setShowDetail } = useContext(
+  const { setCounter, counter, setShowDetail, setSelectedProduct } = useContext(
     ShoppingCartContext
   ) as IContext;
 
   return (
     <div
-      onClick={() => setShowDetail(true)}
+      onClick={() => {
+        setShowDetail(true);
+        setSelectedProduct(data);
+      }}
       className="bg-white cursor-pointer w-56 h-60 rounded-lg"
     >
       <figure className="relative mb-2 w-full h-4/5">
