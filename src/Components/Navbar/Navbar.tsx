@@ -6,7 +6,7 @@ import { ShoppingCartContext } from "../../Context/Context";
 
 export const Navbar = () => {
   const activeStyle = "font-semibold text-lg underline underline-offset-4";
-  const { counter } = useContext(ShoppingCartContext);
+  const { cartProducts } = useContext(ShoppingCartContext);
 
   return (
     <nav className="flex justify-between item-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-white">
@@ -43,7 +43,8 @@ export const Navbar = () => {
             );
           })}
         <li className="flex">
-          <ShoppingBagIcon className="h-6 w-6 text-black" />: {counter}
+          <ShoppingBagIcon className="h-6 w-6 text-black" />:{" "}
+          {cartProducts.length}
         </li>
       </ul>
     </nav>
