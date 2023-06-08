@@ -5,11 +5,17 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 
 export const Card = ({ data }: { data: Product }) => {
   const { category, images, title, price } = data;
-  const { cartProducts, setShowDetail, setSelectedProduct, setCartProducts } =
-    useContext(ShoppingCartContext);
+  const {
+    cartProducts,
+    setShowDetail,
+    setSelectedProduct,
+    setCartProducts,
+    setCheckoutOpen,
+  } = useContext(ShoppingCartContext);
 
   const addProductToCart = () => {
     setCartProducts([...cartProducts, data]);
+    setCheckoutOpen(true);
   };
 
   return (
