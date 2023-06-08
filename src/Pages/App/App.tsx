@@ -4,6 +4,7 @@ import "./App.css";
 import { Navbar } from "../../Components/Navbar/Navbar";
 import { AppRoutes } from "../../constants/routes.constants";
 import { ShoppingCartProvider } from "../../Context/Context";
+import { CheckoutSideMenu } from "../../Components/CheckoutSideMenu/CheckoutSideMenu";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <AppRoutes />
+        <CheckoutSideMenu />
       </BrowserRouter>
     </ShoppingCartProvider>
   );

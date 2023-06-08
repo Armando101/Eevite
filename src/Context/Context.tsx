@@ -5,7 +5,11 @@ export interface IContext {
   showDetail: boolean;
   selectedProduct: Product;
   cartProducts: Product[];
+  checkoutOpen: boolean;
   setShowDetail: React.Dispatch<React.SetStateAction<IContext["showDetail"]>>;
+  setCheckoutOpen: React.Dispatch<
+    React.SetStateAction<IContext["checkoutOpen"]>
+  >;
   setSelectedProduct: React.Dispatch<
     React.SetStateAction<IContext["selectedProduct"]>
   >;
@@ -18,6 +22,7 @@ export const ShoppingCartContext = createContext<IContext>({} as IContext);
 
 export const ShoppingCartProvider = ({ children }: { children: any }) => {
   const [showDetail, setShowDetail] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product>(
     {} as Product
   );
@@ -30,6 +35,8 @@ export const ShoppingCartProvider = ({ children }: { children: any }) => {
         showDetail,
         selectedProduct,
         cartProducts,
+        checkoutOpen,
+        setCheckoutOpen,
         setSelectedProduct,
         setShowDetail,
         setCartProducts,
