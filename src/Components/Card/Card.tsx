@@ -21,7 +21,7 @@ export const Card = ({ data }: { data: Product }) => {
   const renderIcon = (id: number) => {
     const isInCard = cartProducts.some((product) => product.id === id);
     const containerClass =
-      "absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 m-2 p-1 rounded-lg";
+      "absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 m-2  rounded-lg";
     return isInCard ? (
       <div className={`${containerClass} p-0`}>
         <CheckIcon className="h-6 w-6 bg-black rounded-lg text-white" />

@@ -11,3 +11,10 @@ export interface Product {
   category: Catrgory;
   images: string[];
 }
+
+export interface Order {
+  date: string;
+  products: Product[];
+  totalPrice: number;
+  totalProducts: number;
+}

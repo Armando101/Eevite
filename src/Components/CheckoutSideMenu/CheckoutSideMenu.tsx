@@ -4,16 +4,35 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartContext } from "../../Context/Context";
 import { OrderCard } from "../OrderCard/OrderCard";
 import { totalPrice } from "../../utils/utils";
+import { Order } from "../../interfaces";
 
 export const CheckoutSideMenu = () => {
-  const { setCheckoutOpen, setCartProducts, checkoutOpen, cartProducts } =
-    useContext(ShoppingCartContext);
+  const {
+    setCheckoutOpen,
+    setCartProducts,
+    setOrder,
+    order,
+    checkoutOpen,
+    cartProducts,
+  } = useContext(ShoppingCartContext);
 
   const handleDelete = (id: number) => {
     const filteredProducts = cartProducts.filter(
       (product) => product.id !== id
     );
     setCartProducts(filteredProducts);
+  };
+
+  const handleCheckout = () => {
+    const orderToAdd: Order = {
+      date: "01.02.23",
+      products: cartProducts,
+      totalProducts: cartProducts.length,
+      totalPrice: totalPrice(cartProducts),
+    };
+
+    setOrder([...order, orderToAdd]);
+    setCartProducts([]);
   };
 
   return (
@@ -31,7 +50,7 @@ export const CheckoutSideMenu = () => {
           />
         </div>
       </div>
-      <div className="px-6 overflow-y-scroll">
+      <div className="px-6 overflow-y-scroll flex-1">
         {cartProducts.map((product) => (
           <OrderCard
             key={product.id}
@@ -40,13 +59,19 @@ export const CheckoutSideMenu = () => {
           />
         ))}
       </div>
-      <div className="px-6">
-        <p className="flex justify-between items-center">
+      <div className="px-6 mb-6">
+        <p className="flex justify-between items-center mb-2">
           <span className="font-light">Total: </span>
           <span className="font-medium text-2xl">
             ${totalPrice(cartProducts)}
           </span>
         </p>
+        <button
+          className="w-full rounded-lg bg-black py-3 text-white"
+          onClick={() => handleCheckout()}
+        >
+          Checkout
+        </button>
       </div>
     </aside>
   );

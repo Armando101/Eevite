@@ -1,10 +1,11 @@
 import { createContext, useState } from "react";
-import { Product } from "../interfaces";
+import { Order, Product } from "../interfaces";
 
 export interface IContext {
   showDetail: boolean;
   selectedProduct: Product;
   cartProducts: Product[];
+  order: Order[];
   checkoutOpen: boolean;
   setShowDetail: React.Dispatch<React.SetStateAction<IContext["showDetail"]>>;
   setCheckoutOpen: React.Dispatch<
@@ -13,6 +14,7 @@ export interface IContext {
   setSelectedProduct: React.Dispatch<
     React.SetStateAction<IContext["selectedProduct"]>
   >;
+  setOrder: React.Dispatch<React.SetStateAction<IContext["order"]>>;
   setCartProducts: React.Dispatch<
     React.SetStateAction<IContext["cartProducts"]>
   >;
@@ -26,6 +28,7 @@ export const ShoppingCartProvider = ({ children }: { children: any }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product>(
     {} as Product
   );
+  const [order, setOrder] = useState<Order[]>([]);
 
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
 
@@ -36,10 +39,12 @@ export const ShoppingCartProvider = ({ children }: { children: any }) => {
         selectedProduct,
         cartProducts,
         checkoutOpen,
+        order,
         setCheckoutOpen,
         setSelectedProduct,
         setShowDetail,
         setCartProducts,
+        setOrder,
       }}
     >
       {children};
