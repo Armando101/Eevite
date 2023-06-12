@@ -3,6 +3,7 @@ import styles from "./CheckoutSideMenu.module.css";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartContext } from "../../Context/Context";
 import { OrderCard } from "../OrderCard/OrderCard";
+import { totalPrice } from "../../utils/utils";
 
 export const CheckoutSideMenu = () => {
   const { setCheckoutOpen, setCartProducts, checkoutOpen, cartProducts } =
@@ -38,6 +39,14 @@ export const CheckoutSideMenu = () => {
             handleDelete={() => handleDelete(product.id)}
           />
         ))}
+      </div>
+      <div className="px-6">
+        <p className="flex justify-between items-center">
+          <span className="font-light">Total: </span>
+          <span className="font-medium text-2xl">
+            ${totalPrice(cartProducts)}
+          </span>
+        </p>
       </div>
     </aside>
   );
