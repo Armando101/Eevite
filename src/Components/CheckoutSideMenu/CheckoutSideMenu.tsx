@@ -5,8 +5,16 @@ import { ShoppingCartContext } from "../../Context/Context";
 import { OrderCard } from "../OrderCard/OrderCard";
 
 export const CheckoutSideMenu = () => {
-  const { setCheckoutOpen, checkoutOpen, cartProducts } =
+  const { setCheckoutOpen, setCartProducts, checkoutOpen, cartProducts } =
     useContext(ShoppingCartContext);
+
+  const handleDelete = (id: number) => {
+    const filteredProducts = cartProducts.filter(
+      (product) => product.id !== id
+    );
+    setCartProducts(filteredProducts);
+  };
+
   return (
     <aside
       className={`${styles.productDetail} ${
@@ -24,7 +32,11 @@ export const CheckoutSideMenu = () => {
       </div>
       <div className="px-6 overflow-y-scroll">
         {cartProducts.map((product) => (
-          <OrderCard key={product.id} product={product} />
+          <OrderCard
+            key={product.id}
+            product={product}
+            handleDelete={() => handleDelete(product.id)}
+          />
         ))}
       </div>
     </aside>

@@ -1,11 +1,7 @@
 import { useContext } from "react";
 import { Product } from "../../interfaces";
 import { ShoppingCartContext } from "../../Context/Context";
-import {
-  CheckCircleIcon,
-  CheckIcon,
-  PlusIcon,
-} from "@heroicons/react/24/solid";
+import { CheckIcon, PlusIcon } from "@heroicons/react/24/solid";
 
 export const Card = ({ data }: { data: Product }) => {
   const { category, images, title, price } = data;
@@ -27,8 +23,8 @@ export const Card = ({ data }: { data: Product }) => {
     const containerClass =
       "absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 m-2 p-1 rounded-lg";
     return isInCard ? (
-      <div className={containerClass}>
-        <CheckIcon className="h-6 w-6 text-white" />
+      <div className={`${containerClass} p-0`}>
+        <CheckIcon className="h-6 w-6 bg-black rounded-lg text-white" />
       </div>
     ) : (
       <div
