@@ -13,6 +13,7 @@ export interface Product {
 }
 
 export interface Order {
+  id?: number;
   date: string;
   products: Product[];
   totalPrice: number;

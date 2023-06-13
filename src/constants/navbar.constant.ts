@@ -12,7 +12,7 @@ export const navBarOptions: INavBarOptions[] = [
   },
   {
     title: "All",
-    url: "/all",
+    url: "/",
     side: "left",
   },
   {
