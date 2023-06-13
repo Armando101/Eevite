@@ -3,10 +3,16 @@ import { Layout } from "../../Components/Layout/Layout";
 import { OrderCard } from "../../Components/OrderCard/OrderCard";
 import { ShoppingCartContext } from "../../Context/Context";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const MyOrder = () => {
   const { order } = useContext(ShoppingCartContext);
+  const params = useParams();
+
+  const idNumber = Number(params.id);
+  const index = idNumber >= 0 ? idNumber : order.length - 1;
+
+  console.log(index);
 
   return (
     <Layout>
@@ -17,7 +23,7 @@ export const MyOrder = () => {
         <h1>My Orders</h1>
       </div>
       <div className="flex flex-col w-80">
-        {order?.slice(-1)[0].products.map((product) => (
+        {order?.[index].products.map((product) => (
           <OrderCard key={product.id} product={product} />
         ))}
       </div>

@@ -10,7 +10,7 @@ export const MyOrders = () => {
   return (
     <Layout>
       {order.map((order, index) => (
-        <Link key={index} to={`/my-orders/${order.id}`}>
+        <Link key={index} to={`/my-orders/${index}`}>
           <OrderCardList
             totalPrice={order.totalPrice}
             totalProducts={order.totalProducts}
