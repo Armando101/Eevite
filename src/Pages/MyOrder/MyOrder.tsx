@@ -12,8 +12,6 @@ export const MyOrder = () => {
   const idNumber = Number(params.id);
   const index = idNumber >= 0 ? idNumber : order.length - 1;
 
-  console.log(index);
-
   return (
     <Layout>
       <div className="flex items-center justify-center w-80 relative mb-5">

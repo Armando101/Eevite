@@ -25,7 +25,6 @@ export const Home = () => {
   useEffect(() => {
     setSearchByCategory(category || "");
     setSearchByTitle("");
-    console.log(searchByTitle);
   }, [category]);
 
   return (
