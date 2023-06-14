@@ -1,15 +1,32 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Card } from "../../Components/Card/Card";
 import { Layout } from "../../Components/Layout/Layout";
 import { ProductDetail } from "../../Components/ProductDetail/ProductDetail";
 import { ShoppingCartContext } from "../../Context/Context";
+import { useParams } from "react-router-dom";
 
 export const Home = () => {
-  const { filteredItems, items, searchByTitle, setSearchByTitle } =
-    useContext(ShoppingCartContext);
+  const {
+    filteredItems,
+    items,
+    searchByTitle,
+    searchByCategory,
+    setSearchByTitle,
+    setSearchByCategory,
+  } = useContext(ShoppingCartContext);
   const itemsToRender =
-    filteredItems.length > 0 && searchByTitle ? filteredItems : items;
-  const notFoundProducts = filteredItems.length === 0 && searchByTitle;
+    filteredItems.length > 0 && (searchByTitle || searchByCategory)
+      ? filteredItems
+      : items;
+  const notFoundProducts =
+    filteredItems.length === 0 && (searchByTitle || searchByCategory);
+  const { category } = useParams();
+
+  useEffect(() => {
+    setSearchByCategory(category || "");
+    setSearchByTitle("");
+    console.log(searchByTitle);
+  }, [category]);
 
   return (
     <Layout>
@@ -21,6 +38,7 @@ export const Home = () => {
         type="text"
         onChange={(event) => setSearchByTitle(event.target.value)}
         placeholder="Search product"
+        value={searchByTitle || ""}
       />
       {notFoundProducts ? (
         <h2>Product not found</h2>

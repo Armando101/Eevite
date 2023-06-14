@@ -13,6 +13,10 @@ export const AppRoutes = () => {
       element: <Home />,
     },
     {
+      path: "/:category",
+      element: <Home />,
+    },
+    {
       path: "/my-account",
       element: <MyAccount />,
     },

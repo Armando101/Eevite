@@ -9,6 +9,7 @@ export interface IContext {
   items: Product[];
   filteredItems: Product[];
   searchByTitle: string;
+  searchByCategory: string;
   order: Order[];
   checkoutOpen: boolean;
   setShowDetail: React.Dispatch<React.SetStateAction<IContext["showDetail"]>>;
@@ -28,6 +29,9 @@ export interface IContext {
   >;
   setFilteredItems: React.Dispatch<
     React.SetStateAction<IContext["filteredItems"]>
+  >;
+  setSearchByCategory: React.Dispatch<
+    React.SetStateAction<IContext["searchByCategory"]>
   >;
 }
 
@@ -49,6 +53,9 @@ export const ShoppingCartProvider = ({ children }: { children: any }) => {
 
   // Get products by title
   const [searchByTitle, setSearchByTitle] = useState<string>("");
+  // Get products by category
+  const [searchByCategory, setSearchByCategory] = useState<string>("");
+  const [filteredByCategory, setFilteredByCategory] = useState<Product[]>([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -66,11 +73,26 @@ export const ShoppingCartProvider = ({ children }: { children: any }) => {
     );
   };
 
+  const filtereItemsByCategory = (items: Product[], query: string) => {
+    return items?.filter((item) =>
+      item.category.name.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+    );
+  };
+
   useEffect(() => {
+    const filteredItems = searchByCategory ? filteredByCategory : items;
     if (searchByTitle) {
-      setFilteredItems(filtereItemsByTitle(items, searchByTitle));
+      setFilteredItems(filtereItemsByTitle(filteredItems, searchByTitle));
     }
   }, [items, searchByTitle]);
+
+  useEffect(() => {
+    if (searchByCategory) {
+      setFilteredItems(filtereItemsByCategory(items, searchByCategory));
+      setFilteredByCategory(filtereItemsByCategory(items, searchByCategory));
+      return;
+    }
+  }, [items, searchByCategory]);
 
   return (
     <ShoppingCartContext.Provider
@@ -83,6 +105,7 @@ export const ShoppingCartProvider = ({ children }: { children: any }) => {
         items,
         searchByTitle,
         filteredItems,
+        searchByCategory,
         setCheckoutOpen,
         setSelectedProduct,
         setShowDetail,
@@ -91,6 +114,7 @@ export const ShoppingCartProvider = ({ children }: { children: any }) => {
         setItems,
         setSearchByTitle,
         setFilteredItems,
+        setSearchByCategory,
       }}
     >
       {children};
